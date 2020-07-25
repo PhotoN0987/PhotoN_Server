@@ -1,0 +1,10 @@
+.DS_Store
+go.sum
+*.log
+!.gitkeep
+config.json
+
+# 実行ファイル
+__debug_bin
+Photon_Server
+
