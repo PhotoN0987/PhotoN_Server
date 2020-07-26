@@ -24,8 +24,8 @@ func NewUserAPI(router *gin.RouterGroup, repo repository.UserRepository) {
 	userRoutes := router.Group("/users")
 	{
 		userRoutes.GET("", userAPI.GetAll)
-		userRoutes.GET("/:id", userAPI.GetByID)
-		userRoutes.POST("", userAPI.Create)
+		userRoutes.GET("/signin", userAPI.GetByEmailAndPassword)
+		userRoutes.POST("/signup", userAPI.Create)
 		userRoutes.PUT("", userAPI.Update)
 		userRoutes.DELETE("/:id", userAPI.Delete)
 	}
@@ -48,10 +48,11 @@ func (api *UserAPI) GetAll(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
-// GetByID UserをIDで検索して取得します
-func (api *UserAPI) GetByID(c *gin.Context) {
-	id, _ := strconv.Atoi(c.Param("id"))
-	result, err := api.repository.GetByID(id)
+// GetByEmailAndPassword UserをEmailとパスワードで検索して取得します
+func (api *UserAPI) GetByEmailAndPassword(c *gin.Context) {
+	email := c.Query("email")
+	password := c.Query("password")
+	result, err := api.repository.GetByEmailAndPassword(email, password)
 
 	if err != nil {
 		if err == sql.ErrNoRows {

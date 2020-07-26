@@ -11,7 +11,7 @@ import (
 // UserRepository repository
 type UserRepository interface {
 	GetAll() ([]model.UserTable, error)
-	GetByID(id int) (model.UserTable, error)
+	GetByEmailAndPassword(email string, password string) (model.UserTable, error)
 	Create(user model.User) (int64, error)
 	Update(user model.User) error
 	Delete(id int) error
@@ -33,7 +33,7 @@ func (r *userRepository) GetAll() ([]model.UserTable, error) {
 	users := []model.UserTable{}
 
 	query := `
-		SELECT * FROM users
+		SELECT user_id,user_password,user_name,user_email,user_introduce,update_date,create_date FROM users 
 	`
 	rows, err := r.db.Query(query)
 	if err != nil {
@@ -42,7 +42,7 @@ func (r *userRepository) GetAll() ([]model.UserTable, error) {
 
 	for rows.Next() {
 		var user model.UserTable
-		err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.Introduce, &user.Password, &user.CreatedAt, &user.UpdatedAt)
+		err := rows.Scan(&user.ID, &user.Password, &user.Name, &user.Email, &user.Introduce, &user.UpdatedAt, &user.CreatedAt)
 
 		if err != nil {
 			return users, err
@@ -54,17 +54,17 @@ func (r *userRepository) GetAll() ([]model.UserTable, error) {
 	return users, err
 }
 
-// GetByID Get single usersdata
-func (r *userRepository) GetByID(id int) (model.UserTable, error) {
+// GetByEmailAndPassword Get single usersdata
+func (r *userRepository) GetByEmailAndPassword(email string, password string) (model.UserTable, error) {
 	user := model.UserTable{}
 
 	query := `
-		SELECT * FROM users 
-		WHERE id=?
+		SELECT user_id, user_name, user_email, user_introduce, update_date, create_date FROM users 
+		WHERE user_email=? AND user_password=?
 	`
-	row := r.db.QueryRow(query, id)
+	row := r.db.QueryRow(query, email, password)
 
-	err := row.Scan(&user.ID, &user.Name, &user.Email, &user.Introduce, &user.Password, &user.CreatedAt, &user.UpdatedAt)
+	err := row.Scan(&user.ID, &user.Name, &user.Email, &user.Introduce, &user.UpdatedAt, &user.CreatedAt)
 
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -81,8 +81,8 @@ func (r *userRepository) GetByID(id int) (model.UserTable, error) {
 func (r *userRepository) Create(user model.User) (int64, error) {
 	query := `
 		INSERT INTO 
-		users(user_password, user_name, user_email, user_introduce) 
-		VALUES(?, ?, ?, ?)
+		users(user_password, user_name, user_email) 
+		VALUES(?, ?, ?)
 	`
 	stmtInsert, err := r.db.Prepare(query)
 	if err != nil {
@@ -90,7 +90,7 @@ func (r *userRepository) Create(user model.User) (int64, error) {
 	}
 	defer stmtInsert.Close()
 
-	result, err := stmtInsert.Exec(user.Password, user.Name, user.Email, user.Introduce)
+	result, err := stmtInsert.Exec(user.Password, user.Name, user.Email)
 	if err != nil {
 		return 0, err
 	}

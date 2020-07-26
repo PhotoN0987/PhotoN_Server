@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN go build -o go-simple-arch main.go
+RUN go build -o Photon_Server main.go
 
 FROM alpine:latest
 
@@ -20,7 +20,6 @@ WORKDIR /app
 
 EXPOSE 3000
 
-COPY --from=builder /app/go-simple-arch /app
-COPY --from=builder /app/web /app/web
+COPY --from=builder /app/Photon_Server /app
 
-CMD /app/go-simple-arch
+CMD /app/Photon_Server

@@ -17,9 +17,9 @@ func (_m *UserRepository) GetAll() ([]model.UserTable, error) {
 	return ret.Get(0).([]model.UserTable), ret.Error(1)
 }
 
-// GetByID is mock function
-func (_m *UserRepository) GetByID(id int) (model.UserTable, error) {
-	ret := _m.Called(id)
+// GetByEmailAndPassword is mock function
+func (_m *UserRepository) GetByEmailAndPassword(email string, password string) (model.UserTable, error) {
+	ret := _m.Called(email, password)
 	return ret.Get(0).(model.UserTable), ret.Error(1)
 }
 
