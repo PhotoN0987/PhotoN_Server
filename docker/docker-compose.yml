@@ -1,7 +1,19 @@
 version: '3.2'
 
 services:
-      
+  web:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    container_name: Photon_Server
+    ports:
+      - 8888:8888
+    depends_on:
+      - mysql
+    volumes:
+      - ../config.json:/app/config.json
+      - ../log:/app/log
+
   mysql: # Mysql container
     build:
       context: ./mysql
