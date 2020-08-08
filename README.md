@@ -34,7 +34,7 @@ docker-compose up -d --build
 
 APIのテスト
 ``` bash
-curl -i -X GET 'http://localhost:3000/api/v1/users'
+curl -i -X GET 'http://localhost:8888/api/v1/users'
 ```
 
 ## 実行ファイルの作成・実行
