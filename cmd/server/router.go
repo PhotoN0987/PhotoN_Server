@@ -1,9 +1,9 @@
 package server
 
 import (
-	"Photon_Server/pkg/api"
-	"Photon_Server/pkg/repository"
 	"net/http"
+	"photon-server/pkg/api"
+	"photon-server/pkg/repository"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"

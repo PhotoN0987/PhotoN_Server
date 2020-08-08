@@ -1,11 +1,11 @@
 package api
 
 import (
-	"Photon_Server/pkg/model"
-	"Photon_Server/pkg/repository"
 	"database/sql"
 	"log"
 	"net/http"
+	"photon-server/pkg/model"
+	"photon-server/pkg/repository"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

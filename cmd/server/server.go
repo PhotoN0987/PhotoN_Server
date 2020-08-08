@@ -1,9 +1,9 @@
 package server
 
 import (
-	"Photon_Server/pkg/config"
-	"Photon_Server/pkg/database"
 	"net/http"
+	"photon-server/pkg/config"
+	"photon-server/pkg/database"
 	"time"
 
 	"github.com/gin-gonic/gin"

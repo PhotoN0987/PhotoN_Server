@@ -1,4 +1,4 @@
-module Photon_Server
+module photon-server
 
 go 1.14
 

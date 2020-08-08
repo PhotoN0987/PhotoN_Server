@@ -1,4 +1,4 @@
-# PhotoN_Server
+# photon-server
 
 # 概要
 
@@ -47,7 +47,7 @@ curl -i -X GET 'http://localhost:8888/api/v1/users'
 go build
 
 # 実行
-./Photon_Server
+./photon-server
 
 ```
 

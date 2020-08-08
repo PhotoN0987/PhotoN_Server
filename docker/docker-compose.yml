@@ -5,7 +5,7 @@ services:
     build:
       context: ../
       dockerfile: Dockerfile
-    container_name: Photon_Server
+    container_name: photon-server
     ports:
       - 8888:8888
     depends_on:
@@ -18,7 +18,7 @@ services:
     build:
       context: ./mysql
       dockerfile: Dockerfile
-    container_name: Photon_Server-mysql
+    container_name: photon-server-mysql
     image: mysql:5.7
     restart: always
     volumes:
@@ -26,7 +26,7 @@ services:
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       MYSQL_ROOT_PASSWORD: rootPassword
-      MYSQL_DATABASE: Photon_Server
+      MYSQL_DATABASE: photon-server
       MYSQL_USER:     user
       MYSQL_PASSWORD: password
       TZ: Asia/Tokyo
@@ -34,7 +34,7 @@ services:
       - 3306:3306
 
   pma: # phpMyAdmin container
-    container_name: Photon_Server-pma
+    container_name: photon-server-pma
     image: phpmyadmin/phpmyadmin:latest
     restart: always
     environment:

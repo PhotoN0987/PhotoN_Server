@@ -8,6 +8,6 @@
     "port": "3306",
     "user": "user",
     "password": "password",
-    "database": "Photon_Server"
+    "database": "photon-server"
   }
 }
