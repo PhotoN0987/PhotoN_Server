@@ -1,11 +1,11 @@
 package repository
 
 import (
-	"Photon_Server/pkg/database"
-	"Photon_Server/pkg/model"
 	"database/sql"
 	"fmt"
 	"log"
+	"photon-server/pkg/database"
+	"photon-server/pkg/model"
 )
 
 // UserRepository repository

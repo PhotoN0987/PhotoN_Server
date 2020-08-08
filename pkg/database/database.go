@@ -1,10 +1,10 @@
 package database
 
 import (
-	"Photon_Server/pkg/config"
 	"database/sql"
 	"fmt"
 	"net/url"
+	"photon-server/pkg/config"
 )
 
 // DB Database

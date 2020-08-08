@@ -1,13 +1,13 @@
 package api_test
 
 import (
-	"Photon_Server/pkg/api"
-	"Photon_Server/pkg/mock"
-	"Photon_Server/pkg/model"
 	"bytes"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"photon-server/pkg/api"
+	"photon-server/pkg/mock"
+	"photon-server/pkg/model"
 	"strconv"
 	"testing"
 	"time"

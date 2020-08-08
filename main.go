@@ -1,10 +1,10 @@
 package main
 
 import (
-	"Photon_Server/cmd/logger"
-	"Photon_Server/cmd/server"
-	"Photon_Server/pkg/config"
-	"Photon_Server/pkg/database"
+	"photon-server/cmd/logger"
+	"photon-server/cmd/server"
+	"photon-server/pkg/config"
+	"photon-server/pkg/database"
 
 	_ "github.com/go-sql-driver/mysql"
 )

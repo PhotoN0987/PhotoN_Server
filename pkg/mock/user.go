@@ -1,7 +1,7 @@
 package mock
 
 import (
-	"Photon_Server/pkg/model"
+	"photon-server/pkg/model"
 
 	"github.com/stretchr/testify/mock"
 )
