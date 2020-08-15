@@ -1,9 +1,14 @@
 package model
 
 import (
+	"bytes"
 	"encoding/base64"
-	"log"
-	"os"
+
+	"photon-server/pkg/awsclient"
+	"time"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
 
 // File is struct
@@ -20,31 +25,19 @@ type FileUploadForS3 struct {
 	URL string `json:"url"`
 }
 
-// Create create file
-func (f File) Create() error {
+// UploadForS3 uploadForS3 file
+func (f File) UploadForS3() (*s3manager.UploadOutput, error) {
 	data, _ := base64.StdEncoding.DecodeString(f.Base64)
 
-	file, err := os.Create("./upload_files/" + f.Name)
-	if err != nil {
-		log.Println(err.Error())
-		return err
-	}
+	// Upload the file to S3.
+	sess, err := awsclient.CreateAWSSession()
+	uploader := s3manager.NewUploader(sess)
+	result, err := uploader.Upload(&s3manager.UploadInput{
+		Bucket: aws.String("photon-s3"),
+		Key:    aws.String(f.ID + "/" + time.Now().Format("20060102150405") + ".jpg"),
+		Body:   bytes.NewReader(data),
+		ACL:    aws.String("public-read"),
+	})
 
-	defer file.Close()
-
-	file.Write(data)
-
-	return err
-}
-
-// Delete delete file
-func (f File) Delete() error {
-
-	err := os.Remove("./upload_files/" + f.Name)
-	if err != nil {
-		log.Println(err.Error())
-		return err
-	}
-
-	return err
+	return result, err
 }
