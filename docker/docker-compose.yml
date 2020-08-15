@@ -7,13 +7,12 @@ services:
       dockerfile: Dockerfile
     container_name: photon-server
     ports:
-      - 3000:3000
+      - 8888:8888
     depends_on:
       - mysql
     volumes:
       - ../config.json:/app/config.json
       - ../log:/app/log
-      - ../upload_files:/app/upload_files
 
   mysql: # Mysql container
     build:
