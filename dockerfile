@@ -21,5 +21,6 @@ WORKDIR /app
 EXPOSE 3000
 
 COPY --from=builder /app/photon-server /app
+COPY --from=builder /app/web /app/web
 
 CMD /app/photon-server
