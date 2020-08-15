@@ -34,7 +34,7 @@ docker-compose up -d --build
 
 APIのテスト
 ``` bash
-curl -i -X GET 'http://localhost:8888/api/v1/users'
+curl -i -X GET 'http://localhost:3000/api/v1/users'
 ```
 
 ## 実行ファイルの作成・実行
@@ -79,3 +79,7 @@ UnitTest用のパッケージ。
 ## gopkg.in/go-playground/assert.v1
 
 UnitTestの結果判定を行うために採用。
+
+## github.com/aws/aws-sdk-go
+
+AWS S3へアップロードを行うために使用。

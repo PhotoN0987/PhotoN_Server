@@ -2,6 +2,7 @@
 go.sum
 *.log
 !.gitkeep
+config.json
 
 # 実行ファイル
 __debug_bin

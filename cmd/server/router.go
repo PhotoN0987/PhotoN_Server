@@ -29,10 +29,15 @@ func (s *Server) SetUpRouter() *gin.Engine {
 	// Group v1
 	apiV1 := s.router.Group("api/v1")
 	s.userRoutes(apiV1)
+	s.fileRoutes(apiV1)
 	return s.router
 }
 
 func (s *Server) userRoutes(rg *gin.RouterGroup) {
 	repository := repository.NewUserRepository(s.db)
 	api.NewUserAPI(rg, repository)
+}
+
+func (s *Server) fileRoutes(rg *gin.RouterGroup) {
+	api.NewFileAPI(rg)
 }

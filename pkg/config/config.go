@@ -18,6 +18,10 @@ type Config struct {
 		Password string
 		Database string
 	}
+	AwsCredentials struct {
+		AwsSecretAccessKey string
+		AwsAccessKey       string
+	}
 }
 
 // NewConfig create config
