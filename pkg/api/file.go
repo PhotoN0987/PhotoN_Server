@@ -57,4 +57,6 @@ func (api *FileAPI) UploadFileForS3(c *gin.Context) {
 		body := model.FileUploadForS3{URL: ""}
 		c.JSON(http.StatusBadRequest, body)
 	}
+
+	file.Delete()
 }

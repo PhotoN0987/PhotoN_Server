@@ -36,3 +36,15 @@ func (f File) Create() error {
 
 	return err
 }
+
+// Delete delete file
+func (f File) Delete() error {
+
+	err := os.Remove("./upload_files/" + f.Name)
+	if err != nil {
+		log.Println(err.Error())
+		return err
+	}
+
+	return err
+}
